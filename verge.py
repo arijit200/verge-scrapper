@@ -29,8 +29,8 @@ def store_info(link, title, author, date):
 def preload():
     html_text = requests.get('https://www.theverge.com/').text
     # print(html_text)
-
-    soup = BeautifulSoup(html_text, 'lxml')
+    html_text = html_text.encode('utf-8')
+    soup = BeautifulSoup(html_text, "lxml")
     # print(soup)
 
 
