@@ -29,15 +29,18 @@ def store_info(link, title, author, date):
 def preload():
     html_text = requests.get('https://www.theverge.com/').text
     # print(html_text)
-    html_text = html_text.encode('utf-8')
-    soup = BeautifulSoup(html_text, "lxml")
+    # html_text_final = html_text.text.encode('utf-8')
+    soup = BeautifulSoup(html_text, 'lxml')
     # print(soup)
 
 
     the_script = soup.find('script', attrs={'id':'__NEXT_DATA__'}).text
 
+    the_script_en = the_script.encode('ascii', 'ignore')
+    the_script_de = the_script_en.decode('ascii')
+
     with open('script.json', 'w') as f:
-        f.write(the_script)
+        f.write(the_script_de)
 
 
 def extraction():
